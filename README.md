@@ -2,4 +2,6 @@
 
 > Authors: Emily M. Bender, Timnit Gebru, Angelina McMillan-Major, Shmargaret Shmitchell
 
+> Published: March 1st, 2021
+
  
