@@ -112,29 +112,8 @@ Investing resources into the careful curation and documentation of training data
 
 ## Understanding the Risks: The "Stochastic Parrots" Dilemma 🦜
 
-### Mimicry Over Understanding: 
-
 Despite their sophistication, large LMs do not understand the text they generate. Like parrots, they mimic human language based on patterns seen during their training, without grasping the meaning behind the words.
-
-### Misleading Appearances: 
-
-The text produced by LMs can be convincingly human-like, leading people to overestimate the models' understanding. This poses a risk of misinterpretation, where the output is taken as thoughtful or meaningful communication when it is not.
-
-### Amplifying Existing Biases:
-
-Training data for LMs often reflect the biases present in society. These models, therefore, risk perpetuating and even amplifying these biases, contributing to a cycle of reinforcement that can deepen societal divides.
-
-### Potential for Misuse: 
-
-Given their ability to generate plausible text, LMs could be exploited by individuals with harmful intentions, such as spreading misinformation or creating divisive content on a large scale.
-
-### Privacy Concerns: 
-
-LMs trained on vast datasets can inadvertently memorize and reproduce sensitive personal information, posing a risk to individual privacy.
-
-### The Challenge of Translation: 
-
-When used for language translation, LMs might produce fluent but inaccurate translations. The seeming coherence of these translations can mislead users into trusting incorrect or misleading information.
+Therefore, the text produced by LMs can be convincingly human-like, leading people to overestimate the models' understanding. This poses a risk of misinterpretation, where the output is taken as thoughtful or meaningful communication when it is not. As discussed above, training data for LMs often reflect the biases present in society. These models, therefore, risk perpetuating and even amplifying these biases, contributing to a cycle of reinforcement that can deepen societal divides. Given their ability to generate plausible text, LMs could be exploited by individuals with harmful intentions, such as spreading misinformation or creating divisive content on a large scale. Also, LMs trained on vast datasets can inadvertently memorize and reproduce sensitive personal information, posing a risk to individual privacy. Lastly, when used for language translation, LMs might produce fluent but inaccurate translations. The seeming coherence of these translations can mislead users into trusting incorrect or misleading information.
 
 ## Path Forward
 
@@ -170,9 +149,23 @@ Emphasizes the need for the research community to prioritize ethical considerati
 
 Encourages a balanced approach that considers the trade-offs between technological advancements and their impacts, aiming for progress that benefits society as a whole.
 
-# Source and Citation
-https://turhancankargin.com/2023/04/04/the-rise-of-large-language-models-and-ai-investment/
+# Critical Analysis
+
+- **Deep Exploration of Bias Perpetuation:** While the paper discusses biases encoded in large datasets, it could explore more deeply how these biases are perpetuated and the long-term societal impacts. For example, authors could examine case studies where biases in training data have led to real-world discriminatory outcomes, such as in automated hiring tools or predictive policing software. This would help underline the tangible societal impacts of these biases.
+
+- **Providing Clear Guideline**: Although various potential harms are identified, further development could involve a more nuanced discussion on how these harms can be systematically identified, prevented, or mitigated in the design and deployment of LMs by providing the outline of specific design principles for ethical AI, such as transparency, accountability, and fairness. For example, introduce guidelines for transparency in AI systems that require models to provide explanations for their outputs, making it easier to identify and correct biases. Recommend establishing oversight bodies with the authority to review and regulate NLP applications, particularly those used in sensitive areas like healthcare, law enforcement, and employment.
+
+- **Large Language Model's Capability**: 
+
+# Additional Resource
 
 Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, and Noah A. Smith. 2020. RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models. In Findings of the Association for Computational Linguistics: EMNLP 2020. Association for Computational Linguistics, Online, 3356–3369. https://doi.org/10.18653/v1/2020.findings-emnlp.301
+
+Ronan Le Bras, Swabha Swayamdipta, Chandra Bhagavatula, Rowan Zellers, Matthew E Peters, Ashish Sabharwal, and Yejin Choi. 2020. Adversarial Filters of Dataset Biases. In Proceedings of the 37th International Conference on Machine Learning.
+
+Emma Strubell, Ananya Ganesh, and Andrew McCallum. 2019. Energy and Policy Considerations for Deep Learning in NLP. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics. 3645–3650.
+
+# Citation
+https://turhancankargin.com/2023/04/04/the-rise-of-large-language-models-and-ai-investment/
 
 Bender, E. M., Gebru, T., McMillan-Major, A., & Shmitchell, S. (2021). On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency (FAccT '21), 610–623. https://doi.org/10.1145/3442188.3445922
