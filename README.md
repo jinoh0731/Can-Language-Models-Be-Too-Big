@@ -45,7 +45,7 @@ This is because the compute resources typically used in the cloud are not primar
   <summary><b>Question 1: Which factor from the large language model could lead to environmental cost?</b></summary>
   <br> 
 
-  - **Complex Computation Across Millions and Billions of Parameters:** This requires substantial computational power over extended periods, often days or weeks, depending on the size of the model and the dataset. This requires substantial computational power over extended periods, often days or weeks, depending on the size of the model and the dataset.
+  - **Complex Computation Across Millions and Billions of Parameters:** This requires substantial computational power over extended periods, often days or weeks, depending on the size of the model and the dataset.
   - **Data Center Energy Use:** The computational resources needed to train these models are typically housed in data centers, which consume large amounts of electricity to power the servers and the necessary cooling systems to keep the equipment at optimal temperatures. While some of this energy might come from renewable sources, a significant portion still comes from fossil fuels, directly contributing to CO2 emissions.
   - **Repeated Training Cycles:** Training a large model isn't a one-time process. It often requires multiple iterations to fine-tune the parameters and validate the model's performance. Each training cycle consumes more energy, adding to the overall carbon footprint.
   - **Infrastructure and Network Traffic:** Beyond the direct computational requirements, supporting infrastructure, including network data transfers to and from cloud services (where much of this training occurs), adds to the total energy consumption.
