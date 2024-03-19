@@ -85,7 +85,7 @@ Despite advancements, the paper raises concerns about the inclusivity of these m
 > 
 > While mBERT is trained on Wikipedia text from 104 languages, the quality of the model’s performance is not uniform across all these languages. It tends to perform well on languages that have a large presence in the training data (like English, Chinese, or Spanish), but much worse on low-resource languages that have less representation in the dataset. This is due to a phenomenon known as the "Matthew effect" in machine learning, where "rich get richer," meaning that languages with more data available benefit more from the training process.
 > 
-> Code Demo
+> [Code Demo](https://github.com/jinoh0731/Can-Language-Models-Be-Too-Big-/blob/main/paper_code_demo.ipynb)
 
 > Example 2: **GPT-3:**
 > 
@@ -104,7 +104,7 @@ Large, uncurated datasets inherently encode biases, including stereotypes and de
 >
 > GPT-2's training data is sourced by scraping outbound links from Reddit, and Pew Internet Research's 2016 survey reveals 67% of Reddit users in the United States are men, and 64% between ages 18 and 29. Furthermore, Gehman et al. show that GPT-2's training data also finds 272,000 documents from unreliable news sites and 63,000 frim banned subreddits.
 >
-> Code Demo
+> [Code Demo](https://github.com/jinoh0731/Can-Language-Models-Be-Too-Big-/blob/main/paper_code_demo.ipynb)
 
 ### Curation Documentation & Accountability
 
