@@ -83,81 +83,19 @@ The authors discuss how the internet's vastness and the diversity of its content
 Despite advancements, the paper raises concerns about the inclusivity of these models, noting that the majority of the world's languages are underrepresented in technological advancements, and models like mBERT and GPT-3, despite their multilingual data, do not sufficiently address the language support gap.
 
 **Example 1: mBERT (Multilingual BERT):**
->
-> Multilingual BERT (mBERT) is a groundbreaking extension of the original BERT model, pre-trained on a large corpus comprising text from 104 different languages. This model maintains the powerful architecture of BERT while expanding its applicability to a wide range of languages without the need for language-specific model training. mBERT is designed to understand and generate text across languages, making it an invaluable asset for global NLP applications. By leveraging the same transformer architecture as BERT but with training data from multiple languages, mBERT efficiently processes and understands text in languages for which large datasets might not exist, facilitating more inclusive and diverse NLP solutions. This makes mBERT exceptionally versatile and crucial for tasks like machine translation, cross-lingual classification, and multilingual question answering.
-
-#### mBERT VS BERT
-
-
-| Feature               | mBERT                           | BERT-base                         |
-|-----------------------|---------------------------------|-----------------------------------|
-| Number of Parameters  | 178 Million                     | 110 Million                       |
-| Number of Layers      | 12 transformer layers           | 12 transformer layers             |
-| Model Type            | Transformer-based model, specifically utilizing the BERT architecture adapted for multiple languages. | Transformer-based model, utilizing a bidirectional encoder architecture. |
-| Hidden Size           | 768 units in the hidden layers  | 768 units in the hidden layers    |
-| Self-Attention Heads  | 12 attention heads in each transformation block | 12 attention heads in each transformation block |
-| Training Data Scope           | Multilingual (104 languages)                                          | Monolingual (typically English)                        |
-| Training Resource Efficiency  | Higher, due to shared parameters across languages | Lower, as it is trained specifically for one language and requires separate models for each language for multilingual support. |
-| Deployment Efficiency | Higher, a single model serves multiple languages, reducing the need for multiple models in multilingual applications. | Lower, requires separate models for each language, increasing resource use in multilingual settings. |
-| Potential for Reducing Redundancy | High, leverages linguistic similarities across languages, potentially making training more efficient. | N/A, as it focuses on a single language, missing out on cross-lingual efficiencies. |
-| Eco-friendliness in Application | Potentially higher, as deploying one model for many languages can save on computational resources in serving global users. | Potentially lower for global applications, as it would require deploying multiple language-specific models. |
-| Transfer Learning Efficiency | High, as it can be fine-tuned for specific languages or tasks with minimal additional training. | Moderate, fine-tuning is also possible but within the scope of its trained language. |
-| Training Costs for Multi-language | Low, leveraging a single model across multiple languages, reducing the need for separate training sessions and infrastructure| High, deploying separate BERT models for each language in a multilingual setting would cumulatively increase costs. |
-
-
-
-
-
-#### Psudocode for mBERT
-
-```
-Algorithm: mBERT Fine-Tuning for Multilingual Task Learning
-
-/* Fine-tuning a pre-trained multilingual BERT (mBERT) model for a specific NLP task across multiple languages */
-
-Input:
-  - Tasks, a set of NLP tasks (e.g., text classification, named entity recognition)
-  - D_L, a distribution over languages
-  - D_T, a distribution over task-specific training data for each language in D_L
-  - k, the number of examples per task per language for fine-tuning
-  - LossFunction, the task-specific loss function (e.g., cross-entropy for classification)
-
-Hyperparameters:
-  - η, learning rate
-  - batch_size, number of examples per training batch
-  - total_steps, total number of training iterations
-
-Parameters:
-  - θ_pre, pre-trained mBERT model parameters
-  - θ_task, task-specific model parameters to be learned
-
-Output:
-  - θ*, optimized task-specific model parameters after fine-tuning
-
-Procedure:
-1: Initialize task-specific parameters θ_task randomly
-2: θ ← θ_pre ∪ θ_task  // Combine pre-trained mBERT parameters with task-specific parameters
-3: for step in 1 to total_steps do
-4:     Initialize batch_loss to 0
-5:     for batch_index in 1 to batch_size do
-6:         L ← sample language from D_L
-7:         T ← sample task from Tasks
-8:         X, Y ← sample k examples and their labels from D_T for task T and language L
-9:         y_hat ← mBERT(X, θ)  // mBERT's prediction for the input X
-10:        loss ← LossFunction(y_hat, Y)
-11:        batch_loss ← batch_loss + loss
-12:    end for
-13:    average_loss ← batch_loss / batch_size
-14:    θ_task ← θ_task - η * gradient(average_loss with respect to θ_task)  // Update only the task-specific parameters
-15: end for
-16: return θ* ← θ_pre ∪ θ_task  // Return the fine-tuned model parameters
-
-/* End Algorithm */
-```
 > 
 > While mBERT is trained on Wikipedia text from 104 languages, the quality of the model’s performance is not uniform across all these languages. It tends to perform well on languages that have a large presence in the training data (like English, Chinese, or Spanish), but much worse on low-resource languages that have less representation in the dataset. This is due to a phenomenon known as the "Matthew effect" in machine learning, where "rich get richer," meaning that languages with more data available benefit more from the training process.
 > 
 > [Code Demo](https://github.com/jinoh0731/Can-Language-Models-Be-Too-Big-/blob/main/paper_code_demo.ipynb)
+
+#### mBERT
+
+- Number of Parameters: 178 Million
+- Number of Layers 12 transformer layers
+- Model Type: Transformer-based model, specifically utilizing the BERT (Bidirectional Encoder Representations from Transformers) architecture adapted for multiple languages.
+- Hidden Size: 768 units in the hidden layers
+- Self-Attention Heads: 12 attention heads in each transformation block
+
 
 **Example 2: GPT-3:**
 > 
@@ -244,6 +182,104 @@ Encourages a balanced approach that considers the trade-offs between technologic
 - **Providing Clear Guideline**: Although various potential harms are identified, further development could involve a more nuanced discussion on how these harms can be systematically identified, prevented, or mitigated in the design and deployment of LMs by providing the outline of specific design principles for ethical AI, such as transparency, accountability, and fairness. For example, introduce guidelines for transparency in AI systems that require models to provide explanations for their outputs, making it easier to identify and correct biases. Recommend establishing oversight bodies with the authority to review and regulate NLP applications, particularly those used in sensitive areas like healthcare, law enforcement, and employment.
 
 - **Large Language Model's Capability**: Because the paper focuses on large language model's downside, it may not fully highlight the transformative capabilities these models bring to the field of natural language processing (NLP) and various applications. Large LMs like GPT-3, GPT-4 and other, have achieved outstanding performance on a broad spectrum of NLP tasks, and introduced groundbreaking advancements such as few-shot learning, demonstrating a deep understanding of language patterns. Furthermore, they've enabled innovative applications across different domains, from enhancing conversational AI to accelerating scientific discovery, and democratized AI development by providing access to cutting-edge technology. Balancing the recognition of these significant achievements with the critical evaluation of associated risks is essential for guiding the future of AI towards sustainable, equitable, and responsible development.
+
+- **Consideration of Cost-Efficiency:** While discussing the drawbacks of large language models (LMs), it's important to acknowledge that their usage can sometimes result in cost-efficient solutions for certain tasks. For instance, in multilingual applications, utilizing a model like mBERT can significantly reduce costs compared to deploying separate language-specific models like BERT-base for each language. This cost-effectiveness stems from mBERT's ability to leverage shared parameters across languages, reducing the need for additional training sessions and infrastructure. Therefore, in scenarios where cost is a critical factor, opting for a large LM with multilingual capabilities can offer an economically advantageous solution without compromising performance.
+
+> Multilingual BERT (mBERT) is a groundbreaking extension of the original BERT model, pre-trained on a large corpus comprising text from 104 different languages. This model maintains the powerful architecture of BERT while expanding its applicability to a wide range of languages without the need for language-specific model training. mBERT is designed to understand and generate text across languages, making it an invaluable asset for global NLP applications. By leveraging the same transformer architecture as BERT but with training data from multiple languages, mBERT efficiently processes and understands text in languages for which large datasets might not exist, facilitating more inclusive and diverse NLP solutions. This makes mBERT exceptionally versatile and crucial for tasks like machine translation, cross-lingual classification, and multilingual question answering.
+
+#### mBERT VS BERT
+
+  | Feature               | mBERT                           | BERT-base                         |
+|-----------------------|---------------------------------|-----------------------------------|
+| Number of Parameters  | 178 Million                     | 110 Million                       |
+| Number of Layers      | 12 transformer layers           | 12 transformer layers             |
+| Model Type            | Transformer-based model, specifically utilizing the BERT architecture adapted for multiple languages. | Transformer-based model, utilizing a bidirectional encoder architecture. |
+| Hidden Size           | 768 units in the hidden layers  | 768 units in the hidden layers    |
+| Self-Attention Heads  | 12 attention heads in each transformation block | 12 attention heads in each transformation block |
+| Training Data Scope           | Multilingual (104 languages)                                          | Monolingual (typically English)                        |
+
+
+<details>
+  <summary><b>
+Question 2: If you want to do translation task using mBERT or BERT, just by looking at above table, which model would cost less?
+   
+**HINT** : We are trying to do the multi-lingual task !
+  
+  </b></summary>
+  <br> 
+
+mBERT would cost less for translation tasks due to its multilingual training scope and shared parameters across languages. Utilizing mBERT enables efficient use of computational resources. Additionally, mBERT's deployment efficiency is higher as a single model serves multiple languages, reducing the need for separate models, thereby decreasing overall costs in multilingual applications. Overall, mBERT offers cost savings in training and deployment for translation tasks compared to BERT-base, which is primarily trained for monolingual tasks.
+
+
+| Feature               | mBERT                           | BERT-base                         |
+|-----------------------|---------------------------------|-----------------------------------|
+| Number of Parameters  | 178 Million                     | 110 Million                       |
+| Number of Layers      | 12 transformer layers           | 12 transformer layers             |
+| Model Type            | Transformer-based model, specifically utilizing the BERT architecture adapted for multiple languages. | Transformer-based model, utilizing a bidirectional encoder architecture. |
+| Hidden Size           | 768 units in the hidden layers  | 768 units in the hidden layers    |
+| Self-Attention Heads  | 12 attention heads in each transformation block | 12 attention heads in each transformation block |
+| Training Data Scope           | Multilingual (104 languages)                                          | Monolingual (typically English)                        |
+| Training Resource Efficiency  | Higher, due to shared parameters across languages | Lower, as it is trained specifically for one language and requires separate models for each language for multilingual support. |
+| Deployment Efficiency | Higher, a single model serves multiple languages, reducing the need for multiple models in multilingual applications. | Lower, requires separate models for each language, increasing resource use in multilingual settings. |
+| Potential for Reducing Redundancy | High, leverages linguistic similarities across languages, potentially making training more efficient. | N/A, as it focuses on a single language, missing out on cross-lingual efficiencies. |
+| Eco-friendliness in Application | Potentially higher, as deploying one model for many languages can save on computational resources in serving global users. | Potentially lower for global applications, as it would require deploying multiple language-specific models. |
+| Transfer Learning Efficiency | High, as it can be fine-tuned for specific languages or tasks with minimal additional training. | Moderate, fine-tuning is also possible but within the scope of its trained language. |
+| Training Costs for Multi-language | Low, leveraging a single model across multiple languages, reducing the need for separate training sessions and infrastructure| High, deploying separate BERT models for each language in a multilingual setting would cumulatively increase costs. |
+
+ 
+</details>
+
+
+
+
+
+
+#### Psudocode for mBERT
+
+```
+Algorithm: mBERT Fine-Tuning for Multilingual Task Learning
+
+/* Fine-tuning a pre-trained multilingual BERT (mBERT) model for a specific NLP task across multiple languages */
+
+Input:
+  - Tasks, a set of NLP tasks (e.g., text classification, named entity recognition)
+  - D_L, a distribution over languages
+  - D_T, a distribution over task-specific training data for each language in D_L
+  - k, the number of examples per task per language for fine-tuning
+  - LossFunction, the task-specific loss function (e.g., cross-entropy for classification)
+
+Hyperparameters:
+  - η, learning rate
+  - batch_size, number of examples per training batch
+  - total_steps, total number of training iterations
+
+Parameters:
+  - θ_pre, pre-trained mBERT model parameters
+  - θ_task, task-specific model parameters to be learned
+
+Output:
+  - θ*, optimized task-specific model parameters after fine-tuning
+
+Procedure:
+1: Initialize task-specific parameters θ_task randomly
+2: θ ← θ_pre ∪ θ_task  // Combine pre-trained mBERT parameters with task-specific parameters
+3: for step in 1 to total_steps do
+4:     Initialize batch_loss to 0
+5:     for batch_index in 1 to batch_size do
+6:         L ← sample language from D_L
+7:         T ← sample task from Tasks
+8:         X, Y ← sample k examples and their labels from D_T for task T and language L
+9:         y_hat ← mBERT(X, θ)  // mBERT's prediction for the input X
+10:        loss ← LossFunction(y_hat, Y)
+11:        batch_loss ← batch_loss + loss
+12:    end for
+13:    average_loss ← batch_loss / batch_size
+14:    θ_task ← θ_task - η * gradient(average_loss with respect to θ_task)  // Update only the task-specific parameters
+15: end for
+16: return θ* ← θ_pre ∪ θ_task  // Return the fine-tuned model parameters
+
+/* End Algorithm */
+```
 
 # Additional Resource
 
