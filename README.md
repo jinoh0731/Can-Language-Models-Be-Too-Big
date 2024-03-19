@@ -4,7 +4,8 @@
 
 > Published: March 1st, 2021
 
- 
+
+
 ## Introduction
 
 In recent years, the field of Natural Language Processing (NLP) has witnessed a significant shift towards the development of increasingly larger language models (LMs), with BERT, GPT-2/3, and others pushing the boundaries of what's possible in understanding and generating human language. The paper "On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?" by Emily M. Bender, Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell critically examines this trend, posing the essential question: **How big is too big?**
@@ -81,16 +82,94 @@ The authors discuss how the internet's vastness and the diversity of its content
 
 Despite advancements, the paper raises concerns about the inclusivity of these models, noting that the majority of the world's languages are underrepresented in technological advancements, and models like mBERT and GPT-3, despite their multilingual data, do not sufficiently address the language support gap.
 
-> Example 1: **mBERT (Multilingual BERT):**
+**Example 1: mBERT (Multilingual BERT):**
+>
+> Multilingual BERT (mBERT) is a groundbreaking extension of the original BERT model, pre-trained on a large corpus comprising text from 104 different languages. This model maintains the powerful architecture of BERT while expanding its applicability to a wide range of languages without the need for language-specific model training. mBERT is designed to understand and generate text across languages, making it an invaluable asset for global NLP applications. By leveraging the same transformer architecture as BERT but with training data from multiple languages, mBERT efficiently processes and understands text in languages for which large datasets might not exist, facilitating more inclusive and diverse NLP solutions. This makes mBERT exceptionally versatile and crucial for tasks like machine translation, cross-lingual classification, and multilingual question answering.
+
+#### mBERT VS BERT
+
+
+| Feature               | mBERT                           | BERT-base                         |
+|-----------------------|---------------------------------|-----------------------------------|
+| Number of Parameters  | 178 Million                     | 110 Million                       |
+| Number of Layers      | 12 transformer layers           | 12 transformer layers             |
+| Model Type            | Transformer-based model, specifically utilizing the BERT architecture adapted for multiple languages. | Transformer-based model, utilizing a bidirectional encoder architecture. |
+| Hidden Size           | 768 units in the hidden layers  | 768 units in the hidden layers    |
+| Self-Attention Heads  | 12 attention heads in each transformation block | 12 attention heads in each transformation block |
+| Training Data Scope           | Multilingual (104 languages)                                          | Monolingual (typically English)                        |
+| Training Resource Efficiency  | Higher, due to shared parameters across languages | Lower, as it is trained specifically for one language and requires separate models for each language for multilingual support. |
+| Deployment Efficiency | Higher, a single model serves multiple languages, reducing the need for multiple models in multilingual applications. | Lower, requires separate models for each language, increasing resource use in multilingual settings. |
+| Potential for Reducing Redundancy | High, leverages linguistic similarities across languages, potentially making training more efficient. | N/A, as it focuses on a single language, missing out on cross-lingual efficiencies. |
+| Eco-friendliness in Application | Potentially higher, as deploying one model for many languages can save on computational resources in serving global users. | Potentially lower for global applications, as it would require deploying multiple language-specific models. |
+| Transfer Learning Efficiency | High, as it can be fine-tuned for specific languages or tasks with minimal additional training. | Moderate, fine-tuning is also possible but within the scope of its trained language. |
+| Training Costs for Multi-language | Low, leveraging a single model across multiple languages, reducing the need for separate training sessions and infrastructure| High, deploying separate BERT models for each language in a multilingual setting would cumulatively increase costs. |
+
+
+
+
+
+#### Psudocode for mBERT
+
+```
+Algorithm: mBERT Fine-Tuning for Multilingual Task Learning
+
+/* Fine-tuning a pre-trained multilingual BERT (mBERT) model for a specific NLP task across multiple languages */
+
+Input:
+  - Tasks, a set of NLP tasks (e.g., text classification, named entity recognition)
+  - D_L, a distribution over languages
+  - D_T, a distribution over task-specific training data for each language in D_L
+  - k, the number of examples per task per language for fine-tuning
+  - LossFunction, the task-specific loss function (e.g., cross-entropy for classification)
+
+Hyperparameters:
+  - η, learning rate
+  - batch_size, number of examples per training batch
+  - total_steps, total number of training iterations
+
+Parameters:
+  - θ_pre, pre-trained mBERT model parameters
+  - θ_task, task-specific model parameters to be learned
+
+Output:
+  - θ*, optimized task-specific model parameters after fine-tuning
+
+Procedure:
+1: Initialize task-specific parameters θ_task randomly
+2: θ ← θ_pre ∪ θ_task  // Combine pre-trained mBERT parameters with task-specific parameters
+3: for step in 1 to total_steps do
+4:     Initialize batch_loss to 0
+5:     for batch_index in 1 to batch_size do
+6:         L ← sample language from D_L
+7:         T ← sample task from Tasks
+8:         X, Y ← sample k examples and their labels from D_T for task T and language L
+9:         y_hat ← mBERT(X, θ)  // mBERT's prediction for the input X
+10:        loss ← LossFunction(y_hat, Y)
+11:        batch_loss ← batch_loss + loss
+12:    end for
+13:    average_loss ← batch_loss / batch_size
+14:    θ_task ← θ_task - η * gradient(average_loss with respect to θ_task)  // Update only the task-specific parameters
+15: end for
+16: return θ* ← θ_pre ∪ θ_task  // Return the fine-tuned model parameters
+
+/* End Algorithm */
+```
 > 
 > While mBERT is trained on Wikipedia text from 104 languages, the quality of the model’s performance is not uniform across all these languages. It tends to perform well on languages that have a large presence in the training data (like English, Chinese, or Spanish), but much worse on low-resource languages that have less representation in the dataset. This is due to a phenomenon known as the "Matthew effect" in machine learning, where "rich get richer," meaning that languages with more data available benefit more from the training process.
 > 
 > [Code Demo](https://github.com/jinoh0731/Can-Language-Models-Be-Too-Big-/blob/main/paper_code_demo.ipynb)
 
-> Example 2: **GPT-3:**
+**Example 2: GPT-3:**
 > 
 >  Even though 7% of GPT-3's training data includes non-English texts, this does not guarantee equitable performance across languages. The model’s capabilities in generating and understanding text can still be disproportionately better in English due to the vast majority of its training data being English. Additionally, the nuances, idiomatic expressions, and cultural contexts of other languages may not be well captured, leading to outputs that are less accurate or appropriate when the model is used for languages other than English.
 
+#### GPT-3
+
+- Number of Parameters: 175 billion parameters.
+- Number of Layers: GPT-3 consists of 96 transformer layers.
+- Model Type: Transformer-based model, specifically utilizing a decoder-only architecture from the Generative Pre-trained Transformer series, optimized for autoregressive language generation.
+- Hidden Size: 12,288 units in the hidden layers.
+- Self-Attention Heads: 96 attention heads in each transformer block.
 
 ### Static Data/Changing Social Views
 
@@ -106,6 +185,15 @@ Large, uncurated datasets inherently encode biases, including stereotypes and de
 >
 > [Code Demo](https://github.com/jinoh0731/Can-Language-Models-Be-Too-Big-/blob/main/paper_code_demo.ipynb)
 
+#### GPT-2
+
+- Number of Parameters: 1.5 Billion
+- Number of Layers: 48 transformer layers
+- Model Type: Transformer-based model, specifically utilizing a decoder-only architecture from the Generative Pre-trained Transformer series, optimized for autoregressive text generation.
+- Hidden Size: 1600 units in the hidden layers
+- Self Attention Head: 25 heads in each transformer block
+
+  
 ### Curation Documentation & Accountability
 
 Investing resources into the careful curation and documentation of training datasets is important. The paper advocates for a move away from simply amassing large quantities of data towards a more thoughtful process of dataset creation. This includes documenting the data collection process, the motivations behind it, and the potential biases within the data. Such practices are essential for creating more equitable and less harmful language technologies.
@@ -155,7 +243,7 @@ Encourages a balanced approach that considers the trade-offs between technologic
 
 - **Providing Clear Guideline**: Although various potential harms are identified, further development could involve a more nuanced discussion on how these harms can be systematically identified, prevented, or mitigated in the design and deployment of LMs by providing the outline of specific design principles for ethical AI, such as transparency, accountability, and fairness. For example, introduce guidelines for transparency in AI systems that require models to provide explanations for their outputs, making it easier to identify and correct biases. Recommend establishing oversight bodies with the authority to review and regulate NLP applications, particularly those used in sensitive areas like healthcare, law enforcement, and employment.
 
-- **Large Language Model's Capability**: 
+- **Large Language Model's Capability**: Because the paper focuses on large language model's downside, it may not fully highlight the transformative capabilities these models bring to the field of natural language processing (NLP) and various applications. Large LMs like GPT-3, GPT-4 and other, have achieved outstanding performance on a broad spectrum of NLP tasks, and introduced groundbreaking advancements such as few-shot learning, demonstrating a deep understanding of language patterns. Furthermore, they've enabled innovative applications across different domains, from enhancing conversational AI to accelerating scientific discovery, and democratized AI development by providing access to cutting-edge technology. Balancing the recognition of these significant achievements with the critical evaluation of associated risks is essential for guiding the future of AI towards sustainable, equitable, and responsible development.
 
 # Additional Resource
 
@@ -164,6 +252,12 @@ Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, and Noah A. Smith. 20
 Ronan Le Bras, Swabha Swayamdipta, Chandra Bhagavatula, Rowan Zellers, Matthew E Peters, Ashish Sabharwal, and Yejin Choi. 2020. Adversarial Filters of Dataset Biases. In Proceedings of the 37th International Conference on Machine Learning.
 
 Emma Strubell, Ananya Ganesh, and Andrew McCallum. 2019. Energy and Policy Considerations for Deep Learning in NLP. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics. 3645–3650.
+
+Anna Rogers, Olga Kovaleva, and Anna Rumshisky. 2020. A Primer in BERTology: What We Know About How BERT Works. Transactions of the Association for Computational Linguistics, Vol. 8, 842–866.
+
+"The #BenderRule: On Naming the Languages We Study and Why It Matters" by Emily Bender for Gradient Pub https://thegradient.pub/the-benderrule-on-naming-the-languages-we-study-and-why-it-matters/
+
+"Tackling AI’s Climate Change Problem" by Niklas Sundberg on MIT Sloan Management Review https://sloanreview.mit.edu/article/tackling-ais-climate-change-problem/
 
 # Citation
 https://turhancankargin.com/2023/04/04/the-rise-of-large-language-models-and-ai-investment/
