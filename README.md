@@ -16,6 +16,9 @@ This work delves into the potential risks associated with the deployment of mass
 
 **1. Transition from N-gram to Neural Models:**
 
+![image](https://github.com/jinoh0731/Can-Language-Models-Be-Too-Big-/assets/111295393/d3584807-8639-4a23-8695-db4f6da2d71b)
+
+
 Early LMs relied on n-gram models that required substantial data but had limitations in capturing longer dependencies. The paper notes the progression to neural models, which provided a foundational shift in handling language processing tasks, notably through pretrained word embeddings and LSTM models that significantly reduced the need for labeled data in supervised tasks.
 
 **2. Advent of Transformer Models:**
